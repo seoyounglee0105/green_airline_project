@@ -2,7 +2,8 @@
 $(document).ready(function() {
 	$(".tr--boardList").on("click", function() {
 		let boardId = parseInt($(this).attr("id").split("boardDetail")[1]);
-		let date = ($(this).children().eq(4));
+		let date = ($(this).children().eq(1).text());
+		console.log(date);
 
 		// boardId 값 경로에 넣어서 controller 타게하기
 		$.ajax({
@@ -12,16 +13,23 @@ $(document).ready(function() {
 		}).done((board) => {
 			// 모달창
 			$(".board--title").text(board.title); // 문자열로 값 렌더링 처리 
-			$(".board--content").html(board.content); // 태그들 태그로 인식 처리
-			$(".board--userId").text(board.userId);
+			
+			$(".board--viewCount").attr("src", '/images/like/eye.png');
 			$(".board--viewCount").text(board.viewCount);
+			
 			if (board.statement) {
 				$(".board--heartCount").attr("src", '/images/like/like.png');
 			} else {
 				$(".board--heartCount").attr("src", '/images/like/unLike.png');
 			}
+			
 			$(".board--heartCount").text(board.heartCount);
+			
+			$(".board--content").html(board.content); // 태그들 태그로 인식 처리
+			$(".board--userId").text(board.userId);
+			
 			$(".board--date").text(date.text());
+			
 			// boardId 값 보내기
 			$(".board--heartCount").attr("boardId", boardId);
 		}).fail((error) => {
