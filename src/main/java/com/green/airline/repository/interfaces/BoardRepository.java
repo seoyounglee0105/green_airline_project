@@ -16,6 +16,10 @@ public interface BoardRepository {
 	public List<Board> selectByBoardList();
 	// 게시물 쓰기
 	public int insertByBoard(BoardDto boardDto);
+	// 게시물 수정
+	public int updateByBoard(Integer id);
+	// 게시물 삭제
+	public int deleteByBoard(Integer id);
 	// 게시물 상세 보기
 	public BoardDto selectByBoardDetail(Integer id);
 	// 게시물 조회 수 증가

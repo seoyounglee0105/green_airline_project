@@ -13,5 +13,4 @@ public class CustomRestfullException extends RuntimeException {
 		super(message);
 		this.status = status;
 	}
-	
 }

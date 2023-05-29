@@ -1,15 +1,9 @@
 package com.green.airline.controller;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -112,8 +106,6 @@ public class BoardController {
 
 				File destination = new File(uploadPath);
 
-//				resizeImageFile(dir, uploadPath, fileName);
-
 				file.transferTo(destination);
 
 				boardDto.setOriginName(file.getOriginalFilename());
@@ -124,53 +116,25 @@ public class BoardController {
 			}
 		}
 
-		boardService.insertBoard(boardDto);
+		boardService.insertByBoard(boardDto);
 
 		return "redirect:/board/list";
 	}
 
-	// 이미지 리사이징
-//	public void resizeImageFile(File dir, String uploadPath, String fileName) {
-//
-//		// 이미지 읽어 오기
-//		BufferedImage inputImage;
-//		try {
-//			inputImage = ImageIO.read(((ServletRequest) dir).getInputStream());
-//
-//			// 이미지 세로 가로 측정
-//			int originWidth = inputImage.getWidth();
-//			int originHeight = inputImage.getHeight();
-//			System.out.println("originWidth : " + originWidth);
-//			System.out.println("originHeight : " + originHeight);
-//			// 변경할 가로 길이
-//			int newWidth = 500;
-//			if (originWidth > newWidth) {
-//				// 기존 이미지 비율을 유지하여 세로 길이 설정
-//				int newHeight = (originHeight * newWidth) / originWidth;
-//				// 이미지 품질 설정
-//				// Image.SCALE_DEFAULT : 기본 이미지 스케일링 알고리즘 사용
-//				// Image.SCALE_FAST : 이미지 부드러움보다 속도 우선
-//				// Image.SCALE_REPLICATE : ReplicateScaleFilter 클래스로 구체화 된 이미지 크기 조절 알고리즘
-//				// Image.SCALE_SMOOTH : 속도보다 이미지 부드러움을 우선
-//				// Image.SCALE_AREA_AVERAGING : 평균 알고리즘 사용
-//				Image resizeImage = inputImage.getScaledInstance(newWidth, newHeight, Image.SCALE_FAST);
-//				System.out.println("resizeImage : " + resizeImage);
-//				BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
-//				System.out.println("newImage : " + newImage);
-//				Graphics graphics = newImage.getGraphics();
-//				System.out.println("graphics : " + graphics);
-//				graphics.drawImage(resizeImage, 0, 0, null);
-//				graphics.dispose();
-//				// 이미지 저장
-//				File newFile = new File(uploadPath);
-//				ImageIO.write(newImage, fileName, newFile);
-//			} else {
-//				((MultipartFile) dir).transferTo(new java.io.File(uploadPath));
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	// 게시글 수정하기
+	@GetMapping("/update/{id}")
+	public String boardByUpdate() {
+
+		return "board/updateBoard";
+	}
+
+	// 게시글 수정하기
+	@PostMapping("/update/{id}")
+	public void boardByUpdate(@PathVariable Integer boardId) {
+		System.out.println(boardId);
+	}
+
+	// 게시글 삭제하기
 
 	// 추천여행지 상세 보기
 	@ResponseBody

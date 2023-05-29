@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.green.airline.dto.BoardDto;
+import com.green.airline.handler.exception.CustomPathException;
 import com.green.airline.repository.interfaces.BoardRepository;
 import com.green.airline.repository.model.Board;
 import com.green.airline.repository.model.LikeHeart;
@@ -39,29 +41,50 @@ public class BoardService {
 	public List<Board> boardList() {
 
 		List<Board> list = boardRepository.selectByBoardList();
-		
-		/*
-		 * for(int i = 0; i < list.size(); i++) {
-		 * System.out.println(list.get(i).getFileName()); }
-		 */
 
 		return list;
 	}
 
 	// 추천 여행지 게시글 작성
 	@Transactional
-	public void insertBoard(BoardDto boardDto) {
-		
+	public void insertByBoard(BoardDto boardDto) {
+
 		User user = (User) session.getAttribute(Define.PRINCIPAL);
 		boardDto.setUserId(user.getId());
-		
+
 		int result = boardRepository.insertByBoard(boardDto);
-		
+
 		if (result != 1) {
 			// todo 예외처리
 		}
 	}
+
+	// 추천 여행지 게시글 수정
+	@Transactional
+	public void updateByBoard(Integer id, String userId) {
+		/*
+		 * User user = (User) session.getAttribute(Define.PRINCIPAL); if (user.getId()
+		 * != null && user.getId() == userId) { int result =
+		 * boardRepository.updateByBoard(id); if (result != 1) { throw new
+		 * CustomPathException("오류가 발생하였습니다. 고객센터로 문의해주시기 바랍니다.",
+		 * HttpStatus.INTERNAL_SERVER_ERROR, userId); } }
+		 */	
+		}
 	
+	// 추천 여행지 게시글 삭제
+	@Transactional
+	public void deleteByBoard(Integer id, String userId) {
+
+		User user = (User) session.getAttribute(Define.PRINCIPAL);
+		if (user.getId() != null && user.getId() == userId) {
+			int result = boardRepository.deleteByBoard(id);
+			if (result != 1) {
+				throw new CustomPathException("오류가 발생하였습니다. 고객센터로 문의해주시기 바랍니다.", HttpStatus.INTERNAL_SERVER_ERROR,
+						userId);
+			}
+		}
+	}
+
 	// 추천 여행지 게시글 상세보기
 	@Transactional
 	public BoardDto boardListDetail(Integer id) {

@@ -40,11 +40,22 @@
 
 	<select id="selectNoticeByCategoryId"
 		resultType="com.green.airline.dto.response.NoticeResponseDto">
-		select *
-		from notice_tb as n
-		inner join notice_category_tb as nc
-		on nc.id = n.category_id
-		where nc.id=#{id}
+		<if test="categoryId==1">
+			select *
+			from notice_tb as n
+			inner join notice_category_tb
+			as nc
+			on nc.id = n.category_id
+		</if>
+
+		<if test="categoryId!=1">
+			select *
+			from notice_tb as n
+			inner join notice_category_tb
+			as nc
+			on nc.id = n.category_id
+			where nc.id=#{categoryId}
+		</if>
 	</select>
 
 </mapper>

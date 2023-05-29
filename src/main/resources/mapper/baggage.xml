@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.green.airline.repository.interfaces.BaggageRepository">
+	
+	<select id="selectLiquids" resultType="com.green.airline.repository.model.CarryOnLiquids">
+		select *
+		from carry_on_liquids_tb
+	</select>
+	
+	<select id="selectLiquidsByName" resultType="com.green.airline.repository.model.CarryOnLiquids">
+		select * 
+		from carry_on_liquids_tb
+		where name=#{name}
+	</select>
+	
+	<select id="selectCheckedBaggageBySection" resultType="com.green.airline.repository.model.CheckedBaggage">
+		select *
+		from checked_baggage_tb
+		where section=#{section}
+	</select>
+	
+	<select id="selectCheckedBaggage" resultType="com.green.airline.repository.model.CheckedBaggage">
+		select section
+		from checked_baggage_tb
+		group by section 
+	</select>
+	
+	<select id="selectBaggageMissByName" resultType="com.green.airline.repository.model.BaggageMiss">
+		select name, guide, note
+		from baggage_miss_tb
+		where name = #{name}
+	</select>
+	
+	<select id="selectBaggageMiss" resultType="com.green.airline.repository.model.BaggageMiss">
+		select name
+		from baggage_miss_tb
+		group by name
+	</select>
+	
+
+</mapper>

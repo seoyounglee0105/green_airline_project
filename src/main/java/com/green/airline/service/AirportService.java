@@ -37,5 +37,5 @@ public class AirportService {
 		List<Airport> airportEntityList = airportRepository.selectByRegion(region);
 		return airportEntityList;
 	}
-	
+
 }

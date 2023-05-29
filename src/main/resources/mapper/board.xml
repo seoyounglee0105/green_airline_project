@@ -13,12 +13,27 @@
 	<!-- 게시물 작성 -->
 	<insert id="insertByBoard">
 		insert into recommend_board_tb
-		(title, content, user_id, view_count, origin_name, file_name)
+		(title, content,
+		user_id, view_count, origin_name, file_name)
 		values
-		(#{title}, #{content}, #{userId},
+		(#{title},
+		#{content}, #{userId},
 		#{viewCount}, #{originName}, #{fileName});
 	</insert>
-	
+
+	<!-- 게시물 수정 -->
+	<update id="updateByBoard">
+		update recommend_board_tb set title = #{title},
+		content = #{content},
+		originName = #{originName}, fileName =
+		#{fileName} where id = #{id}
+	</update>
+
+	<!-- 게시물 삭제 -->
+	<delete id="deleteByBoard">
+		delete from account_tb where id = #{id}
+	</delete>
+
 	<!-- 게시물 상세보기 -->
 	<select id="selectByBoardDetail"
 		resultType="com.green.airline.dto.BoardDto">

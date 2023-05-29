@@ -5,10 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.green.airline.dto.response.AirplaneInfoDto;
 import com.green.airline.dto.response.SeatInfoResponseDto;
 import com.green.airline.dto.response.SeatStatusResponseDto;
-import com.green.airline.repository.model.Seat;
 
+/**
+ * @author 서영
+ *
+ */
 @Mapper
 public interface SeatRepository {
 
@@ -17,5 +21,8 @@ public interface SeatRepository {
 	
 	// 해당 스케줄에 운항하는 비행기의 좌석 리스트 (등급에 따라)
 	public List<SeatStatusResponseDto> selectSeatListByScheduleIdAndGrade(@Param("scheduleId") Integer scheduleId, @Param("grade") String grade);
+	
+	// 해당 비행기의 좌석 등급별 좌석 개수
+	public List<AirplaneInfoDto> selectByAirplaneId(Integer airplaneId);
 	
 }

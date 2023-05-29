@@ -36,13 +36,13 @@ header {
 }
 
 .header--top, nav {
-	width: 1300px;
+	width: 1200px;
 	min-width: 1000px;
 }
 
 main {
 	/* border: 1px solid #ccc; */
-	min-width: 1300px;
+	min-width: 1200px;
 	padding-left: 22px;
 	margin-bottom: 100px;
 }
@@ -54,7 +54,11 @@ main {
 
 .header--top li {
 	font-size: 14px;
-	line-height: 1.6
+	line-height: 1.6;
+}
+
+.header--top li a {
+	color: #3e3e3e;
 }
 
 .li--split {
@@ -69,7 +73,6 @@ main {
 	margin-right: 5px;
 }
 
-
 .material-symbols-outlined:hover {
 	color: black;
 }
@@ -81,7 +84,7 @@ main {
 .logo {
 	min-width: 250px;
 	height: 64px;
-	margin: 0px 10px 17px 20px;
+	margin: 0px 10px 17px 17px;
 	color: white;
 	cursor: pointer;
 }
@@ -111,7 +114,7 @@ nav {
 	font-weight: 600;
 	min-width: 100%;
 	text-align: center;
-	color: #314f79; 
+	color: #373737; 
 }
 
 .nav--depth1 li a:hover {
@@ -121,7 +124,7 @@ nav {
 .nav--bar {
 	background-color: #174481;
 	height: 7px;
-	width: 257px;
+	width: 232px;
 	display: none;
 	position: relative;
 }
@@ -148,12 +151,12 @@ nav {
 }
 
 .nav--div1 {
-	min-width: 25px;
+	min-width: 23px;
 	height: 100%;
 }
 
 .nav--div2 {
-	min-width: 257px; 
+	min-width: 255px; 
 	height: 100%;
 	background-color: #F3FCFE;
 }
@@ -161,7 +164,7 @@ nav {
 .nav--depth2 ul {
 	text-align: center;
 	padding: 10px;
-	min-width: 255px;
+	min-width: 230px;
 }
 
 .nav--split {
@@ -177,8 +180,12 @@ nav {
 
 .nav--depth2--div li {
 	font-size: 17px;
-	margin: 5px 0;
-	padding: 10px 0;
+	padding: 15px 0;
+	border-bottom: 1px solid buttonshadow;
+}
+
+.nav--depth2--div li:last-of-type {
+	border-bottom: hidden;
 }
 
 .nav--depth2--div li a {
@@ -195,7 +202,7 @@ nav {
 	background-color: #9b9b9e;
 	display: flex;
 	justify-content: flex-start;
-	min-width: 1300px;
+	min-width: 1200px;
 	z-index: 1;
 }
 
@@ -244,4 +251,142 @@ nav {
 	display: flex;
 	justify-content: center;	
 	margin-bottom: 30px;
+}
+
+/* 데이트피커 셀 바꾸기*/
+.ui-state-highlight {
+	border: 1px solid #c5c5c5 !important;
+	background-color: #a6a6a6 !important;
+	color: white !important;
+}
+.ui-state-active {
+	border: 1px solid #c5c5c5 !important;
+	background-color: #528cba !important;
+	color: white !important;
+}
+.ui-state-default {
+	border-radius: 2px;
+}
+
+.material-symbols-outlined-fill {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48 !important
+}
+
+footer {
+	width: 100%;
+	text-align: center;
+	margin: 40px 0 20px;
+}
+
+.page--up--button {
+	text-align: center;
+	position: fixed;
+	bottom: 50px;
+	right: 100px;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #ddd;
+	background-color: #FDFDFD;
+}
+
+.page--up--button span {
+	font-size: 40px;	
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.search--btn--middle {
+	background-color: #7CB2D5;
+	padding: 10px 12px 4px 15px;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 19px;
+}
+
+.search--btn--big {
+	background-color: #7CB2D5;
+	padding: 13px 18px 7px 21px;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 20px;
+}
+
+.search--btn--big span {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 500,
+  'GRAD' 0,
+  'opsz' 48 !important;
+}
+
+.close--button {
+	height: 24px;
+	border: none;
+	background: none;
+	color: rgba(0, 0, 0, 0.7)
+}
+
+.list--table {
+	width: 100%;
+	border-color: #ddd;
+}
+
+.list--table th {
+	background-color: #E5EFF3;
+	color: #404040;
+}
+
+.list--table th:first-child, .list--table td:first-child {
+	border-left: hidden;
+}
+
+.list--table th:last-child, .list--table td:last-child {
+	border-right: hidden;
+}
+
+.list--table tr:first-of-type th {
+	border-top: 2px solid #ccc;
+}
+
+.list--table tr:last-of-type td {
+	border-bottom: 2px solid #ccc;
+}
+
+.list--table th, .list--table td {
+	font-size: 17px;
+	text-align: center;
+	padding: 5px;
+}
+
+.list--table label {
+	cursor: pointer;
+}
+
+.small--title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 40px; 
+	color: #314f79;
+}
+
+.small--title span:first-of-type {
+	margin-right: 5px;
+}
+
+.small--title span:hover {
+	color: #314f79;
+}
+
+ul {
+	margin: 0;
 }

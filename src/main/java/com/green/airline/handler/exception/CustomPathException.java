@@ -19,5 +19,4 @@ public class CustomPathException extends RuntimeException {
 		this.status = status;
 		this.path = path;
 	}
-	
 }
