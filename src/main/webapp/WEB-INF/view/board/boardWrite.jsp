@@ -15,7 +15,8 @@
 <main>
 	<h5>여행일지</h5>
 
-	<form action="/board/insert" method="post" enctype="multipart/form-data">
+	<form action="/board/insert" method="post"
+		enctype="multipart/form-data">
 
 		<table class="table">
 			<tr>
@@ -28,11 +29,12 @@
 		</div>
 		<div class="custom-file">
 			<input type="file" class="custom-file-input" id="customFile"
-				accept=".jpg, .jpeg, .png" name="file">
-				<label class="custom-file-label" for="customFile">썸네일용 이미지</label>
+				accept=".jpg, .jpeg, .png" name="file"> <label
+				class="custom-file-label" for="customFile">썸네일용 이미지</label>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-primary">작성하기</button>
+			<button type="submit" class="btn btn-primary"
+				onclick="location.href='/board/insert'">작성하기</button>
 		</div>
 	</form>
 </main>

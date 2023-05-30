@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.green.airline.dto.BoardDto;
-import com.green.airline.handler.exception.CustomPathException;
+import com.green.airline.dto.BoardUpdateDto;
 import com.green.airline.repository.interfaces.BoardRepository;
 import com.green.airline.repository.model.Board;
 import com.green.airline.repository.model.LikeHeart;
@@ -61,27 +60,21 @@ public class BoardService {
 
 	// 추천 여행지 게시글 수정
 	@Transactional
-	public void updateByBoard(Integer id, String userId) {
-		/*
-		 * User user = (User) session.getAttribute(Define.PRINCIPAL); if (user.getId()
-		 * != null && user.getId() == userId) { int result =
-		 * boardRepository.updateByBoard(id); if (result != 1) { throw new
-		 * CustomPathException("오류가 발생하였습니다. 고객센터로 문의해주시기 바랍니다.",
-		 * HttpStatus.INTERNAL_SERVER_ERROR, userId); } }
-		 */	
+	public void updateByBoard(Integer id, BoardUpdateDto boardUpdateDto) {
+
+		int result = boardRepository.updateByBoard(id, boardUpdateDto);
+		if (result != 1) {
+			// todo 예외처리
 		}
-	
+	}
+
 	// 추천 여행지 게시글 삭제
 	@Transactional
-	public void deleteByBoard(Integer id, String userId) {
+	public void deleteByBoard(Integer id) {
 
-		User user = (User) session.getAttribute(Define.PRINCIPAL);
-		if (user.getId() != null && user.getId() == userId) {
-			int result = boardRepository.deleteByBoard(id);
-			if (result != 1) {
-				throw new CustomPathException("오류가 발생하였습니다. 고객센터로 문의해주시기 바랍니다.", HttpStatus.INTERNAL_SERVER_ERROR,
-						userId);
-			}
+		int result = boardRepository.deleteByBoard(id);
+		if (result != 1) {
+			// todo 예외처리
 		}
 	}
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.airline.dto.BoardDto;
+import com.green.airline.dto.BoardUpdateDto;
 import com.green.airline.handler.exception.CustomRestfullException;
 import com.green.airline.repository.interfaces.BoardRepository;
 import com.green.airline.repository.model.Board;
@@ -123,18 +124,68 @@ public class BoardController {
 
 	// 게시글 수정하기
 	@GetMapping("/update/{id}")
-	public String boardByUpdate() {
+	public String boardByUpdate(@PathVariable Integer id, Model model) {
 
-		return "board/updateBoard";
+		BoardDto boardDto = boardService.boardListDetail(id);
+		model.addAttribute("boardDto", boardDto);
+
+		return "/board/updateBoard";
 	}
 
 	// 게시글 수정하기
 	@PostMapping("/update/{id}")
-	public void boardByUpdate(@PathVariable Integer boardId) {
-		System.out.println(boardId);
+	public String boardByUpdate(@PathVariable("id") Integer id, BoardUpdateDto boardUpdateDto) {
+		MultipartFile file = boardUpdateDto.getFile();
+
+		if (!file.isEmpty()) {
+			// 파일 사이즈 체크
+			if (file.getSize() > Define.MAX_FILE_SIZE) {
+				throw new CustomRestfullException("파일 크기는 20MB이상 줄 수 없습니다.", HttpStatus.BAD_REQUEST);
+			}
+
+			try {
+				// 파일 저장 기능
+				String saveDirectory = Define.UPLOAD_DIRECTORY;
+
+				File dir = new File(saveDirectory);
+
+				// 파일이 있는지 없는지 확인
+				if (dir.exists() == false) {
+					// 폴더가 없으면 폴더 생성
+					dir.mkdirs();
+				}
+
+				UUID uuid = UUID.randomUUID();
+				String fileName = uuid + "_" + file.getOriginalFilename();
+
+				// 전체 경로 지정
+				String uploadPath = Define.UPLOAD_DIRECTORY + File.separator + fileName;
+
+				File destination = new File(uploadPath);
+
+				file.transferTo(destination);
+
+				boardUpdateDto.setOriginName(file.getOriginalFilename());
+				boardUpdateDto.setFileName(fileName);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		boardService.updateByBoard(id, boardUpdateDto);
+		System.out.println(boardUpdateDto);
+		return "redirect:/board/list";
 	}
 
 	// 게시글 삭제하기
+	@PostMapping("/delete/{id}")
+	public String boardByDelete(Integer id) {
+
+		boardService.deleteByBoard(id);
+		System.out.println("삭제완료");
+
+		return "redirect:/board/list";
+	}
 
 	// 추천여행지 상세 보기
 	@ResponseBody

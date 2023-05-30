@@ -23,15 +23,15 @@
 
 	<!-- 게시물 수정 -->
 	<update id="updateByBoard">
-		update recommend_board_tb set title = #{title},
-		content = #{content},
-		originName = #{originName}, fileName =
-		#{fileName} where id = #{id}
+		update recommend_board_tb set title = #{boardUpdateDto.title},
+		content = #{boardUpdateDto.content},
+		origin_name = #{boardUpdateDto.originName},
+		file_name = #{boardUpdateDto.fileName} where id = #{id};
 	</update>
-
+	
 	<!-- 게시물 삭제 -->
 	<delete id="deleteByBoard">
-		delete from account_tb where id = #{id}
+		delete from recommend_board_tb where id = #{id};
 	</delete>
 
 	<!-- 게시물 상세보기 -->

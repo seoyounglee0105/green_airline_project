@@ -1074,10 +1074,10 @@ INSERT INTO baggage_request_tb(amount, br_id, member_id)
 INSERT INTO recommend_board_tb
 (title, user_id, content, view_count, origin_name, file_name)
 VALUES
-('제목', 'abc', '게시글내용', 0, '이미지이름', '이미지이름'),
-('제목2', 'a123', '게시글내용2', 0, '이미지이름', '이미지이름'),
-('제목3', 'a123', '게시글내용3', 0, '이미지이름', '이미지이름'),
-('제목4', 'abc', '게시글내용4', 0, '이미지이름', '이미지이름');
+('제목', 'abc', '게시글내용', 0, '0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg', '9434b293-bffa-420c-aec5-cc73418138ae_0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg'),
+('제목2', 'a123', '게시글내용2', 0, '0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg', '9434b293-bffa-420c-aec5-cc73418138ae_0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg'),
+('제목3', 'a123', '게시글내용3', 0, '0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg', '9434b293-bffa-420c-aec5-cc73418138ae_0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg'),
+('제목4', 'abc', '게시글내용4', 0, '0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg', '9434b293-bffa-420c-aec5-cc73418138ae_0f88f5ee-07f0-4922-9abe-0fd4633b77f0.jpeg');
 
 -- 좋아요 샘플 데이터
 INSERT INTO like_heart_tb (board_id, user_id)

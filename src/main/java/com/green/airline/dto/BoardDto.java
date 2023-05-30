@@ -30,7 +30,7 @@ public class BoardDto {
 	public String formatDate() {
 		return TimestampUtil.dateToString(createdAt);
 	}
-	
+
 	public String thumbnailImage() {
 		return fileName == null ? "/images/uploads/a.png" : "/images/uploads/" + fileName;
 	}

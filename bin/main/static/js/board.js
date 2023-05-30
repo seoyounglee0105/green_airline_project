@@ -26,15 +26,16 @@ $(document).ready(function() {
 			// boardId 값 보내기
 			$(".board--heartCount").attr("boardId", boardId);
 
-			// 수정할 게시물 id 찾기
-			$("input[name='boardId']").val(board.id);
+			// update시 수정할 게시물 번호 설정
+			$("input[name=\"boardId\"]").val(board.id);
+
 		}).fail((error) => {
 			console.log(error);
 		});
 	});
 });
 
-// 찜 클릭
+// 좋아요 클릭
 $(document).on("click", ".board--heartCount", function() {
 	let boardId = parseInt($(this).attr("boardId"));
 
@@ -59,23 +60,9 @@ $(document).on("click", ".board--heartCount", function() {
 // 게시글 수정
 $(document).ready(function() {
 	$("#updateButton").on("click", function() {
-		let boardId = $("input[name='boardId']").val();
+		let boardId = $("input[name=\"boardId\"]").val();
 
-		console.log(boardId);
-		
-		$.ajax({
-			type: "POST",
-			url: `/board/update/${boardId}`,
-			data: { boardId: boardId },
-			dataType: "json",
-			success: function(response) {
-				// 성공적으로 처리된 경우의 동작
-				console.log(response);
-			},
-			error: function(error) {
-				// 오류 발생 시의 동작
-				console.log(error);
-			}
-		});
+		location.href = `/board/update/${boardId}`;
+
 	});
 });

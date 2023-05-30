@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.green.airline.dto.BoardDto;
+import com.green.airline.dto.BoardUpdateDto;
 import com.green.airline.repository.model.Board;
 import com.green.airline.repository.model.LikeHeart;
 
@@ -17,7 +18,7 @@ public interface BoardRepository {
 	// 게시물 쓰기
 	public int insertByBoard(BoardDto boardDto);
 	// 게시물 수정
-	public int updateByBoard(Integer id);
+	public int updateByBoard(@Param("id") Integer id, @Param("boardUpdateDto") BoardUpdateDto boardUpdateDto);
 	// 게시물 삭제
 	public int deleteByBoard(Integer id);
 	// 게시물 상세 보기

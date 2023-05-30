@@ -95,7 +95,6 @@
 			</div>
 			<div class="modal-body">
 				<%-- 모달 내용 입력 --%>
-			<input type="hidden" name="boardId" value=${board.id }>
 				<!-- 
 				TODO
 				1. id null 값 확인해서 고치기
@@ -104,8 +103,8 @@
 				 -->
 				<c:choose>
 					<c:when test="${principal != null}">
-						<button type="button" class="btn btn-primary"
-							onclick="location.href='/board/update/{id}'">수정하기</button>
+						<input type="hidden" name="boardId">
+						<button type="button" class="btn btn-primary" id="updateButton">수정하기</button>
 						<button type="button" class="btn btn-primary"
 							onclick="location.href='/board/delete/{id}'">삭제하기</button>
 					</c:when>
