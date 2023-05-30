@@ -33,6 +33,13 @@
 	<delete id="deleteByBoard">
 		delete from recommend_board_tb where id = #{id};
 	</delete>
+	
+	<!-- 게시물 삭제시 좋아요 삭제 -->
+	<delete id="deleteHeartByBoard">
+		delete from like_heart_tb
+		where
+		board_id = #{id}
+	</delete>
 
 	<!-- 게시물 상세보기 -->
 	<select id="selectByBoardDetail"

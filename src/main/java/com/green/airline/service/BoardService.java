@@ -72,6 +72,7 @@ public class BoardService {
 	@Transactional
 	public void deleteByBoard(Integer id) {
 
+		boardRepository.deleteHeartByBoard(id);
 		int result = boardRepository.deleteByBoard(id);
 		if (result != 1) {
 			// todo 예외처리

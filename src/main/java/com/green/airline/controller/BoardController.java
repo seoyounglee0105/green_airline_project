@@ -178,9 +178,10 @@ public class BoardController {
 	}
 
 	// 게시글 삭제하기
-	@PostMapping("/delete/{id}")
-	public String boardByDelete(Integer id) {
+	@GetMapping("/delete/{id}")
+	public String boardByDelete(@PathVariable("id") Integer id) {
 
+		System.out.println("들어옴");
 		boardService.deleteByBoard(id);
 		System.out.println("삭제완료");
 

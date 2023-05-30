@@ -105,8 +105,7 @@
 					<c:when test="${principal != null}">
 						<input type="hidden" name="boardId">
 						<button type="button" class="btn btn-primary" id="updateButton">수정하기</button>
-						<button type="button" class="btn btn-primary"
-							onclick="location.href='/board/delete/{id}'">삭제하기</button>
+						<button type="button" class="btn btn-primary" id="deleteButton">삭제하기</button>
 					</c:when>
 					<c:otherwise>
 

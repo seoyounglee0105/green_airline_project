@@ -66,3 +66,13 @@ $(document).ready(function() {
 
 	});
 });
+
+// 게시글 삭제
+$(document).ready(function() {
+	$("#deleteButton").on("click", function() {
+		let boardId = $("input[name=\"boardId\"]").val();
+
+		location.href = `/board/delete/${boardId}`;
+
+	});
+});

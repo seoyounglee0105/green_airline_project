@@ -29,6 +29,8 @@ public interface BoardRepository {
 	public int insertByHeart(@Param("id") Integer id, @Param("userId") String userId);
 	// 좋아요 취소
 	public int deleteByHeart(@Param("id") Integer id, @Param("userId") String userId);
+	// 게시물 삭제시 좋아요 삭제
+	public int deleteHeartByBoard(Integer id);
 	// 좋아요 수 조회
 	public List<LikeHeart> selectByLikeUser(Integer id);
 	// 게시물에 좋아요를 누른 유저 조회
