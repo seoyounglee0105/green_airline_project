@@ -1,5 +1,7 @@
 package com.green.airline.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +14,19 @@ public class MapApiService {
 	@Autowired
 	private AirportRepository airportRepository;
 
-	public void mapApiSerch(Airport airport) {
-
+	// 공항 좌표값 가져오기
+	public List<Airport> airportSerch(String searchName) {
 		System.out.println("mapAPI post service 전");
-		airportRepository.selectByLikeName(airport.getName());
+		List<Airport> list = airportRepository.selectByLikeName(searchName);
+		System.out.println(list);
 		System.out.println("mapAPI post service 후");
-
+		return list;
+	}
+	
+	// 지역, 이름 가져오기
+	public List<Airport> selectAllName(String region) {
+		List<Airport> list = airportRepository.selectByRegion(region);
+		return list;
 	}
 
 }

@@ -1,13 +1,3 @@
-// 공항 위치정보 조회하기 버튼 클릭
-$(document).ready(function() {
-	$("#searchAirport").on("click", function() {
-		let selectName = $("input[name=\"boardId\"]").val();
-
-		location.href = `/board/delete/${boardId}`;
-
-	});
-});
-
 window.initMap = function() {
 	const map = new google.maps.Map(document.getElementById("map"), {
 		center: { lat: 35.17322, lng: 128.9464591 },
@@ -16,7 +6,7 @@ window.initMap = function() {
 		minZoom: 20,
 	});
 
-	// 특정 위치 표시 위치의 위경도, 생성한 지도 객체 넘기면 생성 됨 
+	/*// 특정 위치 표시 위치의 위경도, 생성한 지도 객체 넘기면 생성 됨 
 	const airport = [
 		{ label: "ICN", name: "인천 국제공항", lat: 37.4692, lng: 126.451 },
 		{ label: "GMP", name: "김포 국제공항", lat: 37.5586545, lng: 126.7944739 },
@@ -60,41 +50,53 @@ window.initMap = function() {
 		{ label: "DXB", name: "두바이 국제공항", lat: 25.2048493, lng: 55.2707828 },
 		{ label: "AUH", name: "아부다비 국제공항", lat: 24.441938, lng: 54.6500736 },
 		{ label: "TLV", name: "텔아비브 벤구리온 국제공항", lat: 32.0072222, lng: 34.8805556 },
-	];
+	];*/
 
-	// 경계 객체 생성 -> 줌 조정하기
 	const bounds = new google.maps.LatLngBounds();
-	// 마커 클릭시 정보창
 	const infowindow = new google.maps.InfoWindow();
 
-	// TODO 
-	// 2. 다른 마커 지우고 검색한 마커로 렌더링하기
-	airport.forEach(({ label, name, lat, lng }) => {
+	// 조회하기 버튼을 누른 위도 경도 가져와서 마커 생성
+	const onClickSearch = () => {
+		const latitude = parseFloat(document.getElementById("latitude").value);
+		const longitude = parseFloat(document.getElementById("longitude").value);
+
 		const marker = new google.maps.Marker({
-			position: { lat, lng },
-			label,
+			position: { lat: latitude, lng: longitude },
 			map,
 		});
-		
-		// 각 마커의 위치 정보 전달
+
 		bounds.extend(marker.position);
-		
-		// TODO 
-		// 1. 조회 클릭했을 때 2번으로 ㄱㄱ
+
+		// 경계 객체 생성 -> 줌 조정하기
+		const bounds = new google.maps.LatLngBounds();
 		// 마커 클릭시 정보창
-		marker.addListener("click", () => {
-			
-			// 클릭 했을 때 지도 중심이 이동
-			map.panTo(marker.position);
-			
-			infowindow.setContent(name);
-			infowindow.open({
-				anchor: marker,
+		const infowindow = new google.maps.InfoWindow();
+
+		airport.forEach(({ label, name, lat, lng }) => {
+			const marker = new google.maps.Marker({
+				position: { lat, lng },
+				label,
 				map,
 			});
-		});
-	});
 
-	// 지도 경계 객체 전달
-	map.fitBounds(bounds);
+			// 각 마커의 위치 정보 전달
+			bounds.extend(marker.position);
+
+			// 마커 클릭시 정보창
+			marker.addListener("click", () => {
+
+				// 클릭 했을 때 지도 중심이 이동
+				map.panTo(marker.position);
+
+				infowindow.setContent(`위도: ${latitude}, 경도: ${longitude}`);
+				infowindow.open({
+					anchor: marker,
+					map,
+				});
+			});
+		});
+
+		// 지도 경계 객체 전달
+		map.fitBounds(bounds);
+	};
 };

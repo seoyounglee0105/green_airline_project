@@ -8,7 +8,7 @@
 		resultType="com.green.airline.repository.model.Airport">
 		SELECT * FROM airport_tb
 	</select>
-
+	
 	<!-- MySQL로 바꾸면 CONCAT으로 바꿔야 함 -->
 	<select id="selectByLikeName"
 		resultType="com.green.airline.repository.model.Airport">
