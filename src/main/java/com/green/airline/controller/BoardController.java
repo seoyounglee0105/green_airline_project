@@ -181,9 +181,7 @@ public class BoardController {
 	@GetMapping("/delete/{id}")
 	public String boardByDelete(@PathVariable("id") Integer id) {
 
-		System.out.println("들어옴");
 		boardService.deleteByBoard(id);
-		System.out.println("삭제완료");
 
 		return "redirect:/board/list";
 	}

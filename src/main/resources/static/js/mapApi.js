@@ -1,11 +1,23 @@
+// 공항 위치정보 조회하기 버튼 클릭
+$(document).ready(function() {
+	$("#searchAirport").on("click", function() {
+		let selectName = $("input[name=\"boardId\"]").val();
+
+		location.href = `/board/delete/${boardId}`;
+
+	});
+});
+
 window.initMap = function() {
 	const map = new google.maps.Map(document.getElementById("map"), {
 		center: { lat: 35.17322, lng: 128.9464591 },
-		zoom: 10,
+		zoom: 18,
+		maxZoom: 19,
+		minZoom: 20,
 	});
 
 	// 특정 위치 표시 위치의 위경도, 생성한 지도 객체 넘기면 생성 됨 
-	const malls = [
+	const airport = [
 		{ label: "ICN", name: "인천 국제공항", lat: 37.4692, lng: 126.451 },
 		{ label: "GMP", name: "김포 국제공항", lat: 37.5586545, lng: 126.7944739 },
 		{ label: "PUS", name: "부산/김해 국제공항", lat: 35.17322, lng: 128.9464591 },
@@ -55,16 +67,21 @@ window.initMap = function() {
 	// 마커 클릭시 정보창
 	const infowindow = new google.maps.InfoWindow();
 
-	malls.forEach(({ label, name, lat, lng }) => {
+	// TODO 
+	// 2. 다른 마커 지우고 검색한 마커로 렌더링하기
+	airport.forEach(({ label, name, lat, lng }) => {
 		const marker = new google.maps.Marker({
 			position: { lat, lng },
 			label,
 			map,
 		});
+		
 		// 각 마커의 위치 정보 전달
 		bounds.extend(marker.position);
 		
-	// 마커 클릭시 정보창
+		// TODO 
+		// 1. 조회 클릭했을 때 2번으로 ㄱㄱ
+		// 마커 클릭시 정보창
 		marker.addListener("click", () => {
 			
 			// 클릭 했을 때 지도 중심이 이동
@@ -80,5 +97,4 @@ window.initMap = function() {
 
 	// 지도 경계 객체 전달
 	map.fitBounds(bounds);
-
 };

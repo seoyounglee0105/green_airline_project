@@ -33,8 +33,7 @@
 				class="custom-file-label" for="customFile">썸네일용 이미지</label>
 		</div>
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-primary"
-				onclick="location.href='/board/insert'">작성하기</button>
+			<button type="submit" class="btn btn-primary">작성하기</button>
 		</div>
 	</form>
 </main>
