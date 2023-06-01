@@ -40,8 +40,8 @@ CREATE TABLE airport_tb(
    id INT PRIMARY KEY AUTO_INCREMENT,
     region VARCHAR(50) NOT NULL,
     name VARCHAR(50) NOT NULL UNIQUE,
-    latitude INT NOT NULL, -- 위도
-    longitude INT NOT NULL -- 경도
+    latitude DOUBLE NOT NULL, -- 위도
+    longitude DOUBLE NOT NULL -- 경도
 );
 
 -- 좌석 등급

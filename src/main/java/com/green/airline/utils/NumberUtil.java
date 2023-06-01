@@ -21,4 +21,10 @@ public class NumberUtil {
 		return df.format(number);
 	}
 	
+	public static String numberFormat(double number) {
+		
+		DecimalFormat df = new DecimalFormat("####.########");
+		return df.format(number);
+	}
+	
 }

@@ -48,9 +48,8 @@
 		<form action="/map" method="post">
 			<div class="form-group col-sm-5">
 				<label for="selectContinent">지역</label> <select class="form-control"
-					name="selectContinent" id="selectContinent"
-					onchange="selectContinentChange(this)">
-					<option value="">공항을 선택해주세요</option>
+					name="selectContinent" id="id--selectContinent">
+					<option>공항을 선택해주세요</option>
 					<option value="대한민국">대한민국</option>
 					<option value="동북아시아">동북아시아</option>
 					<option value="동남아시아/서남아시아">동남아시아/서남아시아</option>
@@ -64,8 +63,8 @@
 
 			<div class="form-group col-sm-5">
 				<label for="airport">공항</label> <select name="selectAirport"
-					class="form-control" id="selectAirport">
-					<option>전체</option>
+					class="form-control" id="id--selectAirport">
+					<option value="">전체</option>
 				</select>
 
 			</div>
@@ -75,81 +74,7 @@
 	</div>
 
 	<div id="map" style="height: 600px;"></div>
-	
+
 </main>
-<script>
-	$(document).ready(function() {
-		$("#selectContinent").change(function() {
-			var selectedContinent = $(this).val();
-
-			$.ajax({
-				url : "/continent",
-				type : "GET",
-				data : {
-					region : selectedContinent
-				},
-			}).done(function(res) {
-				var target = document.getElementById("selectAirport");
-				target.options.length = 0;
-
-				for (var i = 0; i < res.length; i++) {
-					var opt = document.createElement("option");
-					opt.value = res[i].name;
-					opt.innerHTML = res[i].name;
-					target.appendChild(opt);
-				}
-			}).fail(function(error) {
-				console.error(error);
-			});
-		});
-	});
-
-	$(document).ready(function() {
-		$(".btn--search").on("click", function() {
-			// 공항이 선택됬는지 확인
-			var selectedAirport = $("#selectAirport").val();
-			if (selectedAirport === "") {
-				alert("공항을 선택해주세요.");
-				return;
-			}
-
-			// 공항 이름을 쿼리 파라미터로 담아서 controller로 보내기
-			$.ajax({
-				url : "/airportPosition",
-				type : "GET",
-				data : {
-					searchName : selectedAirport
-				}
-			}).done(function(res) {
-				var latitude = res.latitude;
-				var longitude = res.longitude;
-				
-				alert(latitude);
-				alert(longitude);
-
-				// 구글 맵 API를 이용하여 해당 좌표로 이동
-				var map = new google.maps.Map(document.getElementById("map"), {
-					center : {
-						lat : latitude,
-						lng : longitude
-					},
-					zoom : 18
-				});
-
-				// 특정 위치 표시
-				var marker = new google.maps.Marker({
-					position : {
-						lat : latitude,
-						lng : longitude
-					},
-					map : map
-				});
-			}).fail(function(xhr, status, error) {
-				// 요청이 실패했을 때 처리할 코드
-				console.error(error);
-			});
-		});
-	});
-</script>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

@@ -10,41 +10,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.airline.repository.model.Airport;
 import com.green.airline.service.MapApiService;
+import com.green.airline.utils.NumberUtil;
 
 @Controller
 public class MapApiController {
 
 	@Autowired
 	private MapApiService mapApiService;
-	
+
 	// 공항 지역, 이름 찾기
 	@GetMapping("/continent")
 	@ResponseBody
 	public List<Airport> continent(String region) {
-		List<Airport> list = mapApiService.selectAllName(region);
 		
+		System.out.println(region);
+		List<Airport> list = mapApiService.selectAllName(region);
+		System.out.println(list);
+
 		return list;
 	}
-	
+
 	// 공항 좌표값 가져오기
 	@GetMapping("/airportPosition")
 	@ResponseBody
-	public List<Airport> airportPosition(String searchName) {
-		
-		System.out.println(searchName);
-		List<Airport> list = mapApiService.airportSerch(searchName);
-		System.out.println(list);
-		
-		DecimalFormat df = new DecimalFormat("#.0000000");
-	    String formattedLatitude = df.format(list.get(0).getLatitude());
-	    String formattedLongitude = df.format(list.get(0).getLongitude());
+	public Airport airportPosition(String searchName) {
 
-	    System.out.println(formattedLatitude);
-	    System.out.println(formattedLongitude);
-	    
-		return list;
+		List<Airport> list = mapApiService.airportSearch(searchName);
+		
+		return list.get(0);
 	}
-	
+
 	@GetMapping("/map")
 	public String map() {
 		return "/board/mapApi";
@@ -57,5 +52,5 @@ public class MapApiController {
 	 * 
 	 * }
 	 */
-	
+
 }
