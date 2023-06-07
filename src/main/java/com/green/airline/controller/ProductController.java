@@ -283,6 +283,7 @@ public class ProductController {
 		String code;
 		try {
 			code = emailService.sendSimpleMessage(email, gifticonImageName);
+//			code = emailService.sendSimpleMessage(email);
 			System.out.println("email : " + email);
 			System.out.println("인증코드 : " + code);
 		} catch (Exception e) {
