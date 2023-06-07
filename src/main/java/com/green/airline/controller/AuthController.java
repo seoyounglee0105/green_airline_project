@@ -49,7 +49,7 @@ public class AuthController {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", "91cf28839247e9924114aeb1a23b8852");
-		params.add("redirect_uri", "http://localhost:80/auth/kakao/callback");
+		params.add("redirect_uri", "http://" + Define.IP_ADDRESS + "/auth/kakao/callback");
 		params.add("code", code);
 
 		// 카카오 서버로 요청할 URI 만듦
@@ -71,7 +71,6 @@ public class AuthController {
 
 		// 서비스에서 회원가입여부 확인 - select -> null -> 회원가입 처리
 		User principal = userService.readSocialDtoById(res.getId()); // <-- 서비스에서 회원가입여부 확인
-		System.out.println("11111111111111" + principal);
 		// principal이 null이 나올 경우 회원가입이 안된 상태
 
 		String id = res.getId();
@@ -104,7 +103,6 @@ public class AuthController {
 			// 유저 조회해서 db에 값 없으면 회원가입 처리 후 로그인 처리 있으면
 			// 그냥 로그인처리
 			// 회원가입 처리
-//			userService.createByUser(res); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			SocialJoinFormDto joinFormDto = new SocialJoinFormDto();
 			joinFormDto.setId(id);
 			joinFormDto.setKorName(res.getProperties().getNickname());
@@ -117,10 +115,10 @@ public class AuthController {
 
 			// 멤버 회원가입 처리도 해주기
 			// 로그인 처리
-			
+
 //			 User principal2 = userService.readSocialDtoById(res.getId());
 //			 session.setAttribute(Define.PRINCIPAL, principal2);
-			 
+
 			// 로그인 처리(session에 값 담기) -> 위 principal에서는 null이 나왔기 때문에
 			// session에 값을 담아주려면 다시 서비스를 불러서 조회해야함
 
@@ -132,27 +130,21 @@ public class AuthController {
 			session.setAttribute(Define.PRINCIPAL, principal);
 		}
 
-		if (gender.equals("male")) {
-			gender = "M";
-		} else if (gender.equals("female")) {
-			gender = "F";
-		}
-		
 		return "redirect:/";
 	}
 
-	@GetMapping("/apiJoin")
-	public String apiJoinPage(@RequestParam(name = "id") String id, @RequestParam(defaultValue = "none") String email,
-			@RequestParam(defaultValue = "none") String gender) {
-		if (gender.equals("male")) {
-			gender = "M";
-		} else if (gender.equals("female")) {
-			gender = "F";
-		}
-
-		// redirect => 새로운 request response 객체를 생성해서 요청을 던지는 녀석
-		return "redirect:/socialJoin?id=" + id + "&email=" + email + "&gender=" + gender;
-	}
+//	@GetMapping("/apiJoin")
+//	public String apiJoinPage(@RequestParam(name = "id") String id, @RequestParam(defaultValue = "none") String email,
+//			@RequestParam(defaultValue = "none") String gender) {
+//		if (gender.equals("male")) {
+//			gender = "M";
+//		} else if (gender.equals("female")) {
+//			gender = "F";
+//		}
+//
+//		// redirect => 새로운 request response 객체를 생성해서 요청을 던지는 녀석
+//		return "redirect:/socialJoin?id=" + id + "&email=" + email + "&gender=" + gender;
+//	}
 
 	// 사용자 정보 받아오기
 	private SocialDto requestKakaoUserInfo(String oAuthToken) {
